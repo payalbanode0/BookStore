@@ -7,8 +7,8 @@ namespace RepositoryLayer.Interfaces
 {
     public interface IAdminRL
     {
-       
-            public Adminlogin Admin(AdminResponse adminResponse);
-        
+
+        public Adminlogin Admin(AdminResponse adminResponse);
+
     }
 }

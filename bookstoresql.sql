@@ -56,3 +56,34 @@ Begin
 	Update Users
 	set Password = @Password where Email = @Email
 End;
+
+
+create Table Admins
+(
+	AdminId int Identity(1,1) primary key not null,
+	FullName varchar(255) not null,
+	Email varchar(255) not null,
+	Password varchar(255) not null,
+	MobileNumber varchar(50) not null,
+);
+
+
+INSERT INTO Admins VALUES ('Admin payal','admin@bookstore.com', 'Admin@23', '+91 8793819197');
+
+Create Proc LoginAdmin
+(
+	@Email varchar(max),
+	@Password varchar(max)
+)
+as
+BEGIN
+	If(Exists(select * from Admins where Email= @Email and Password = @Password))
+		Begin
+			select * from Admins where Email= @Email and Password = @Password;
+		end
+	Else
+		Begin
+			select 2;
+		End
+END;
+

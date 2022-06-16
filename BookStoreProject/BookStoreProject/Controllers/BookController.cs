@@ -35,6 +35,66 @@ namespace BookStoreProject.Controllers
                 return this.BadRequest(new { Success = false, message = ex.Message });
             }
         }
+        [HttpPost("UpdateBook/{BookId}")]
+        public IActionResult UpdateBook(int BookId, BookModel updateBook)
+        {
+            try
+            {
+                var result = this.BookBL.UpdateBook(BookId, updateBook);
+                if (result.Equals(true))
+                {
+                    return this.Ok(new { success = true, message = $"Book updated Successfully ", response = updateBook });
+                }
+                else
+                {
+                    return this.BadRequest(new { Status = false, Message = result });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(new { Success = false, message = ex.Message });
+            }
+        }
+
+        [HttpDelete("DeleteBook/{BookId}")]
+        public IActionResult DeleteBook(int BookId)
+        {
+            try
+            {
+                if (this.BookBL.DeleteBook(BookId))
+                {
+                    return this.Ok(new { Success = true, message = "Book Deleted Sucessfully" });
+                }
+                else
+                {
+                    return this.BadRequest(new { Success = false, message = "Enter Valid Book Id" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(new { Success = false, message = ex.Message });
+            }
+        }
+        [HttpGet("GetBook/{BookId}")]
+        public IActionResult GetBookByBookId(int BookId)
+        {
+            try
+            {
+                var book = this.BookBL.GetBookByBookId(BookId);
+                if (book != null)
+                {
+                    return this.Ok(new { Success = true, message = "Book Detail Fetched Sucessfully", Response = book });
+                }
+                else
+                {
+                    return this.BadRequest(new { Success = false, message = "Enter Valid Book Id" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(new { Success = false, message = ex.Message });
+            }
+        }
 
     }
 }

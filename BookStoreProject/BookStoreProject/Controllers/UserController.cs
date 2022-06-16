@@ -19,7 +19,7 @@ namespace BookStoreProject.Controllers
             this.userBL = UserBL;
         }
 
-        [HttpPost("register")]
+        [HttpPut("register")]
         public IActionResult AddUser(UserRegisterModel UserReg)
         {
             try
