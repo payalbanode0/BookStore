@@ -62,6 +62,18 @@ namespace BusinessLayer.Services
                 throw;
             }
         }
+
+        public List<BookModel> GetAllBooks()
+        {
+            try
+            {
+                return this.BookRL.GetAllBooks();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 
 }

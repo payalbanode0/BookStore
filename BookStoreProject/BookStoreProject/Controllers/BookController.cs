@@ -95,6 +95,26 @@ namespace BookStoreProject.Controllers
                 return this.BadRequest(new { Success = false, message = ex.Message });
             }
         }
+        [HttpGet("GetAllBook")]
+        public IActionResult GetAllBooks()
+        {
+            try
+            {
+                var updatedBookDetail = this.BookBL.GetAllBooks();
+                if (updatedBookDetail != null)
+                {
+                    return this.Ok(new { Success = true, message = "Book Detail Fetched Sucessfully", Response = updatedBookDetail });
+                }
+                else
+                {
+                    return this.BadRequest(new { Success = false, message = "Enter Valid Book Id" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(new { Success = false, message = ex.Message });
+            }
+        }
 
     }
 }

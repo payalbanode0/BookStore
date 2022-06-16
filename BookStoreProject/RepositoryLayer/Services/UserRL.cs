@@ -253,11 +253,12 @@ namespace RepositoryLayer.Services
             {
                 if (newPassword == confirmPassword)
                 {
-                    this.sqlConnection = new SqlConnection(this.Configuration["ConnectionString:BookDB"]);
+                    this.sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:BookDB"]);
                     SqlCommand com = new SqlCommand("SpUserResetPassword", this.sqlConnection)
                     {
                         CommandType = CommandType.StoredProcedure
                     };
+
                     com.Parameters.AddWithValue("@Email", email);
                     com.Parameters.AddWithValue("@Password", confirmPassword);
                     this.sqlConnection.Open();

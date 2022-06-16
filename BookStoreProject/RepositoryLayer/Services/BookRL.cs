@@ -91,6 +91,57 @@ namespace RepositoryLayer.Services
             }
         }
 
+        public List<BookModel> GetAllBooks()
+        {
+            try
+            {
+                List<BookModel> book = new List<BookModel>();
+                this.sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:BookDB"]);
+                SqlCommand cmd = new SqlCommand("spGetAllBook", this.sqlConnection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                this.sqlConnection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        book.Add(new BookModel
+                        {
+                            BookId = Convert.ToInt32(reader["BookId"]),
+                            BookName = reader["BookName"].ToString(),
+                            AuthorName = reader["AuthorName"].ToString(),
+                            TotalRating = Convert.ToInt32(reader["TotalRating"]),
+                            RatingCount = Convert.ToInt32(reader["RatingCount"]),
+                            DiscountPrice = Convert.ToDecimal(reader["DiscountPrice"]),
+                            OriginalPrice = Convert.ToDecimal(reader["OriginalPrice"]),
+                            BookDetails = reader["BookDetails"].ToString(),
+                            BookImage = reader["BookImage"].ToString(),
+                            BookQuantity = Convert.ToInt32(reader["BookQuantity"])
+                        });
+                    }
+                    this.sqlConnection.Close();
+                    return book;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                this.sqlConnection.Close();
+            }
+        }
+
+    
+
         public BookModel GetBookByBookId(int BookId)
         {
             try

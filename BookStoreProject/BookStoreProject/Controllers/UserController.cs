@@ -80,7 +80,7 @@ namespace BookStoreProject.Controllers
                 var Email = User.Claims.FirstOrDefault(e => e.Type == "Email").Value.ToString();
                 if (this.userBL.ResetPassword(Email, newPassword, confirmPassword))
                 {
-                    return this.Ok(new { Success = true, message = " Password Changed Successfully " });
+                    return this.Ok(new { Success = true, message = " Password Change Successfully " });
                 }
                 else
                 {

@@ -58,23 +58,37 @@ where BookId = @BookId;
 End;
 
 
-create procedure UpdateBook
+create procedure spUpdateBook
 (
+@BookId int,
 @BookName varchar(255),
 @AuthorName varchar(255),
 @TotalRating int,
 @RatingCount int,
-@OriginalPrice decimal,
-@DiscountPrice decimal,
+@OriginalPrice Decimal,
+@DiscountPrice Decimal,
 @BookDetails varchar(255),
 @BookImage varchar(255),
 @BookQuantity int
 )
 as
 BEGIN
-update into BookTable(BookName, AuthorName, TotalRating, RatingCount, OriginalPrice, 
-DiscountPrice, BookDetails, BookImage, BookQuantity)
-values (@BookName, @AuthorName, @TotalRating, @RatingCount ,@OriginalPrice, @DiscountPrice,
-@BookDetails, @BookImage, @BookQuantity
-);
+Update BookTable set BookName = @BookName, 
+AuthorName = @AuthorName,
+TotalRating = @TotalRating,
+RatingCount = @RatingCount,
+OriginalPrice= @OriginalPrice,
+DiscountPrice = @DiscountPrice,
+BookDetails = @BookDetails,
+BookImage =@BookImage,
+BookQuantity = @BookQuantity
+where BookId = @BookId;
+End;
+
+
+-- create procedure to get all book 
+create procedure spGetAllBook
+as
+BEGIN
+	select * from BookTable;
 End;
