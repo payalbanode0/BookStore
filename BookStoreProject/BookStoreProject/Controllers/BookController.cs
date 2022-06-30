@@ -18,7 +18,7 @@ namespace BookStoreProject.Controllers
         {
             this.BookBL = bookBL;
         }
-        [Authorize(Roles = Role.Admin)]
+       [Authorize(Roles = Role.Admin)]
         [HttpPost("AddBook")]
         public IActionResult Book(BookModel book)
         {
@@ -36,7 +36,7 @@ namespace BookStoreProject.Controllers
                 return this.BadRequest(new { Success = false, message = ex.Message });
             }
         }
-        [Authorize(Roles = Role.Admin)]
+       [Authorize(Roles = Role.Admin)]
         [HttpPost("UpdateBook/{BookId}")]
         public IActionResult UpdateBook(int BookId, BookModel updateBook)
         {

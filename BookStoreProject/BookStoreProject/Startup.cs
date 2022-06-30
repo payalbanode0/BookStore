@@ -42,6 +42,23 @@ namespace BookStoreProject
             services.AddTransient<IBookBL, BookBL>();
             services.AddTransient<ICartBL, CartBL>();
             services.AddTransient<ICartRL, CartRL>();
+
+            services.AddTransient<IWishListBL, WishListBL>();
+            services.AddTransient<IWishListRL, WishListRL>();
+
+
+            services.AddTransient<IAddressBL, AddressBL>();
+            services.AddTransient<IAddressRL, AddressRL>();
+
+
+            services.AddTransient<IOrderBL, OrderBL>();
+            services.AddTransient<IOrderRL, OrderRL>();
+
+
+
+            services.AddTransient<IFeedbackBL, FeedbackBL>();
+            services.AddTransient<IFeedbackRL, FeedbackRL>();
+            services.AddCors();
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -58,7 +75,8 @@ namespace BookStoreProject
                     ValidateAudience = false
                 };
             });
-
+            services.AddControllers().AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddSwaggerGen(setup =>
             {
@@ -105,13 +123,19 @@ namespace BookStoreProject
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors(builder =>
+            {
+                builder.SetIsOriginAllowed(origin => true);
+                builder.AllowAnyOrigin();
+                builder.AllowAnyHeader();
+                builder.AllowAnyMethod();
+            });
             app.UseRouting();
-            
-           
+
+
 
             app.UseAuthorization();
-
+            app.UseCors("AllowOrigin");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

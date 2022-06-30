@@ -31,7 +31,7 @@ namespace RepositoryLayer.Services
                     $"<body>" +
                     $"<h2> Dear Fundoo User, </h2>\n" +
                     $"<h3>please click on the below link to reset password</h3>" +
-                    $"<a href='http://localhost:4200/reset-password/{token}'>clickhere </a>\n" +
+                    $"<a href='http://localhost:4200/resetpassword/{token}'>clickhere </a>\n" +
                     $"<h3 style =\"color:#blue\">\n the link is valid for 1 hour</h3>" +
                     $"</body>" +
                     $"</html>";

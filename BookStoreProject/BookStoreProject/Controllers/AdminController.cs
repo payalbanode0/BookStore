@@ -15,6 +15,7 @@ namespace BookStoreProject.Controllers
         {
             this.AdminBL = adminBL;
         }
+
         [HttpPost("AdminLogin")]
         public IActionResult Admin(AdminResponse adminResponse)
         {

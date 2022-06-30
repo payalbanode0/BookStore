@@ -19,7 +19,7 @@ namespace BookStoreProject.Controllers
             this.userBL = UserBL;
         }
 
-        [HttpPut("register")]
+        [HttpPost("register")]
         public IActionResult AddUser(UserRegisterModel UserReg)
         {
             try
@@ -71,7 +71,7 @@ namespace BookStoreProject.Controllers
             }
         }
         [Authorize]
-        [HttpPut("ResetPassword")]
+        [HttpPut("ResetPassword/{newPassword}/{confirmPassword}")]
         public IActionResult ResetPassword(string newPassword, string confirmPassword)
         {
             try

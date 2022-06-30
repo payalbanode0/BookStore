@@ -85,7 +85,7 @@ namespace RepositoryLayer.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                     new Claim(ClaimTypes.Role, "User"),
+                    new Claim(ClaimTypes.Role, "User"),
                     new Claim("Email", email),
                     new Claim("UserId",userID.ToString())
                 }),
